@@ -32,7 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
         respostaEl.textContent = "Nenhuma resposta recebida da IA.";
       }
     } catch (error) {
-      console.error("Erro ao gerar resposta:", error);
+      console.error("Erro detalhado:", error);
+      alert(`Erro: ${JSON.stringify(error)}`);
+
 
       // Se error for um objeto, pega a mensagem; senão, mostra o erro direto
       const msg = error?.message || String(error);
