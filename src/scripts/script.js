@@ -32,8 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
         respostaEl.textContent = "Nenhuma resposta recebida da IA.";
       }
     } catch (error) {
-      respostaEl.textContent = `Erro ao gerar resposta da IA:\n${error.message}`;
+      console.error("Erro ao gerar resposta:", error);
+
+      // Se error for um objeto, pega a mensagem; senão, mostra o erro direto
+      const msg = error?.message || String(error);
+
+      respostaEl.textContent = `Erro ao gerar resposta da IA:\n${msg}`;
     }
+
   }
 
   enviarBtn.addEventListener("click", () => {
