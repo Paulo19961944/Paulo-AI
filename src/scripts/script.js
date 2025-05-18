@@ -13,48 +13,30 @@ document.addEventListener("DOMContentLoaded", () => {
     respostaEl.textContent = "Carregando resposta da IA...";
 
     try {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-            Authorization: `Bearer ${API_TOKEN}`,
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-            model: "llama3-8b-8192", // Modelo válido da Groq
-            messages: [
-                { role: "system", content: "Você é um assistente direto, inteligente e útil." },
-                { role: "user", content: prompt },
-            ],
-            temperature: 0.7,
-            }),
-        });
+      const response = await fetch("/api/groq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
 
-        if (!response.ok) {
-            const errorBody = await response.text(); // Pega texto do erro
-            throw new Error(`Erro ${response.status}: ${errorBody}`);
-        }
+      const data = await response.json();
 
-        const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error?.message || "Erro desconhecido");
+      }
 
-        if (data.choices && data.choices.length > 0) {
-            respostaEl.textContent = data.choices[0].message.content.trim();
-        } else {
-            respostaEl.textContent = "Nenhuma resposta recebida da IA.";
-        }
-
-        } catch (error) {
-        console.error("Erro ao gerar resposta da IA:", error);
-
-        // Mostra mensagem clara
-        respostaEl.textContent = `Erro ao gerar resposta da IA:\n${error.message || JSON.stringify(error)}`;
-        }
-
-
+      if (data.choices?.[0]?.message?.content) {
+        respostaEl.textContent = data.choices[0].message.content.trim();
+      } else {
+        respostaEl.textContent = "Nenhuma resposta da IA.";
+      }
+    } catch (error) {
+      respostaEl.textContent = `Erro ao gerar resposta da IA: ${error.message}`;
+      console.error("Erro:", error);
+    }
   }
 
-  enviarBtn.addEventListener("click", () => {
-    enviarPrompt(promptInput.value);
-  });
+  enviarBtn.addEventListener("click", () => enviarPrompt(promptInput.value));
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();

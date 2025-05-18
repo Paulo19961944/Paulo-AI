@@ -2,24 +2,16 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paulo AI - Sua Inteligência Artificial</title>
-  <link rel="stylesheet" href="src/styles/style.css" />
-  <link
-    rel="shortcut icon"
-    href="https://cdn-icons-png.flaticon.com/512/8616/8616590.png"
-    type="image/x-icon"
-  />
+  <link rel="stylesheet" href="/src/styles/style.css" />
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/8616/8616590.png" type="image/x-icon">
 </head>
 <body>
   <header>
     <nav>
-      <p>PauloAI</p>
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/8616/8616590.png"
-        alt="AI-Icon"
-        id="ai-icon"
-      />
+      <p>Paulo</p>
+      <img src="https://cdn-icons-png.flaticon.com/512/8616/8616590.png" alt="AI-Icon" id="ai-icon">
     </nav>
   </header>
   <main>
@@ -29,18 +21,14 @@
     </section>
     <section class="prompt-container">
       <form id="prompt-form">
-        <input type="text" name="prompt" id="prompt" autocomplete="off" />
+        <input type="text" name="prompt" id="prompt" />
       </form>
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/4028/4028647.png"
-        alt="enviar-prompt"
-        id="enviar-prompt"
-      />
+      <img src="https://cdn-icons-png.flaticon.com/512/4028/4028647.png" alt="enviar-prompt" id="enviar-prompt" />
     </section>
-    <section>
-      <p id="resposta"></p>
+    <section class="resposta-container">
+      <p id="resposta">Resposta da IA aparecerá aqui.</p>
     </section>
   </main>
-  <script src="src/scripts/script.js"></script>
+  <script src="/src/scripts/script.js"></script>
 </body>
 </html>
